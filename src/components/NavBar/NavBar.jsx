@@ -13,7 +13,7 @@ return(
           <Nav.Link href="#home">camisetas</Nav.Link>
           <Nav.Link href="#link">zapatillas</Nav.Link>
           <Nav.Link href="#">pantalones</Nav.Link>
-          <Nav.Link href="#carrito"><CartWidget cantidad={4}/></Nav.Link>
+          <Nav.Link href="#carrito"><CartWidget cantidad={0}/></Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Container>

@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import {Button} from 'react-bootstrap/'
 import "./ItemCount.css"
 
-function ItemCount({stock=10 , initial=1 }) {
+const ItemCount = (props)=> {
+const { stock, initial } = props;
 const [cantidad, setCantidad] = useState (initial)
 
 function sumar() {
@@ -13,19 +14,21 @@ function sumar() {
         if (cantidad > 0) setCantidad(cantidad - 1)
     }
     function onAdd(){
+        if ( cantidad > 0 && cantidad <= stock){
         alert("se agrego "+cantidad+" productos")
+    }
+    else{
+        alert("NO SE AGREGARON ITEMS AL CARRITO");
+    }
     }
     return (
         <>
-        <div className="row">
-            <div className="col-5"></div>
-            <div className="col-2 borde"><h2>{cantidad}</h2></div>
-        </div>
-        <div className="m-2">
+        <div className="input-group mb-3">
                 <Button variant="outline-secondary m-1" onClick={restar}>-</Button>
+                <input  className="form-control text-center" placeholder={cantidad} aria-label="Example text with button addon" aria-describedby="button-addon1" />
                 <Button variant="outline-secondary m-1" onClick={sumar}>+</Button>
-                </div>        
-                <Button variant="outline-secondary" onClick={onAdd}>agregar carrito</Button>
+        </div>        
+        <Button variant="warning" onClick={onAdd}>agregar carrito</Button>
         
         </>
         

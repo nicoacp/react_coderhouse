@@ -1,5 +1,6 @@
 import React ,{useState , useEffect} from 'react'
 import ItemList from "../ItemList/ItemList";
+import ItemDetailContainer from "../ItemDetailContainer/ItemDetailContainer"
 
 const ItemListContainer = (props) => {
     const {greeting} = props;
@@ -7,6 +8,7 @@ const ItemListContainer = (props) => {
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+  const [selectedItem, setSelectedItem] = useState(null);
 
   //array de objetos productos para realizar items
   const productos = [
@@ -35,20 +37,32 @@ useEffect( async () => {
       })
     setLoading(false)
   }, [])
-    
-return (
+  //se crea un metodo que recibe como parametro un item y setea el estado de selected item con el contenido de dicho item >> para saber que item es el seleccionado
+  const selectItem = (item) => setSelectedItem(item);
+
+  return (
     <div>
-        <h1>{greeting}</h1>
-            {/* cuando loading este en "true" (mientras se espera la respuesta de la promesa) se renderizara el texto "CARGANDO...", pero cuando pase a ser false nuevamente (luego de recibir la respuesta diferida de la promesa) dejara de ren derizar eso y renderizara el componente "ItemList" */}
-            {loading
-                ? <h1 style={{color: "blue", fontSize: "3rem" }}>CARGANDO...</h1>
-                : <ItemList items={items} />
-              }
-        
-              {/* si error deja de ser null y pasa a contener algo se renderizara el mensaje de error que se encontrara dentro del estado error al haber sido seteado en el catch de la promesa por el fallo de la misma */}
-              {error && <div>{error}</div>}  
-              </div>         
-    );
+      <h1>{greeting}</h1>
+      {/*  Se muestra el mensaje de "cargando..." hasta que se recupere la informacion de la promesa y se vuelva a poner en false */}
+      {loading && (
+        <h1 style={{ color: "blue", fontSize: "3rem" }}>CARGANDO...</h1>)
+      }
+      {/* En este renderizado condicional se mostrara >> En caso de que se selecione un item y selectedItem tenga contenido, se renderizara el ItemDetailContainer al cual se le va  apasar la informacion de dicho item para que lo renderize y en caso de que no se seleccione nada (selectedItem == null) se renderizara la lista de items */}
+      {!selectedItem ? (
+        <ItemList items={items} selectItem={selectItem} />
+      ) : (
+        <ItemDetailContainer
+          selectedItem={selectedItem}
+          selectItem={selectItem}
+          setError={setError}
+          setLoading={setLoading}
+        />
+      )}
+
+      {/* si error deja de ser null y pasa a contener algo se renderizara el mensaje de error que se encontrara dentro del estado error al haber sido seteado en el catch de la promesa por el fallo de la misma */}
+      {error && <div>{error}</div>}
+    </div>
+  );
 };
 
 export default ItemListContainer

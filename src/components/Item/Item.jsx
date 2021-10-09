@@ -5,11 +5,13 @@ import ItemCount from "../ItemCount/ItemCount";
 //En este componente se retorna una card con un item y sus propiedades que provienen desde el componente ItemList, que a su vez provienen desde ItemListContainer, donde se obtuvieron desde un array
 //este Item recibe como prop un item con propiedades, el cual desestructura para luego ir integrandolas de a una en el componente donde deben estar.
 
-const Item = ({item}) => {
-    const {id, title, description, price, pictureUrl} = item;
+const Item = (props) => {
+    const {id, title, description, price, pictureUrl , selectItem} = props;
 
     return (
-        <div className="col col-md-4">
+
+
+        <div className="col col-md-4" onClick={() => selectItem({ ...props })}> 
             <div id={id} className="card border-dark text-center m-2" style={{ width: "18rem" }}>
                 <img src={pictureUrl} className="card-img-top p-1" style={{ height: "18rem" }} alt="..." />
                 <div className="card-body">

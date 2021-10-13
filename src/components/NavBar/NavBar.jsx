@@ -2,17 +2,19 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Container from 'react-bootstrap/Container'
 import CartWidget from '../CartWidget/CartWidget'
+import { Link } from "react-router-dom";
+
 const NavBar = () =>{
 return(
     <Navbar bg="dark" variant="dark" expand="lg">
     <Container>
-      <Navbar.Brand href="#home">Ecommerce</Navbar.Brand>
+    <Link className="nav-link" exact to="/"> <Navbar.Brand >Ecommerce</Navbar.Brand></Link>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
-          <Nav.Link href="#home">camisetas</Nav.Link>
-          <Nav.Link href="#link">zapatillas</Nav.Link>
-          <Nav.Link href="#">pantalones</Nav.Link>
+        <Link className="nav-link" to="/categoria/camisetas"> camisetas</Link>
+        <Link className="nav-link" to="/categoria/zapatillas">zapatillas</Link>
+        <Link className="nav-link" to="/categoria/pantalones">pantalones</Link>
           <Nav.Link href="#carrito"><CartWidget cantidad={0}/></Nav.Link>
         </Nav>
       </Navbar.Collapse>

@@ -1,11 +1,11 @@
 import NavBar from "./components/NavBar/NavBar"
 import React, { useState } from "react";
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 import ItemListContainer from './components/ItemListContainer/ItemListContainer';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
-
+import Cart from "./components/Cart/Cart"
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -41,6 +41,11 @@ function App() {
               error={error}
               setError={setError}
             />
+          </Route>
+          
+          {/* Ruta que lleva del boton 'terminar compra' al componente carrito */}
+          <Route exact path="/cart">
+            <Cart />
           </Route>
      </Switch>
       {/* si error deja de ser null y pasa a contener algo se renderizara el mensaje de error que se encontrara dentro del estado error al haber sido seteado en el catch de la promesa por el fallo de la misma */}

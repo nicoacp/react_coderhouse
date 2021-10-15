@@ -3,7 +3,7 @@ import {Button} from 'react-bootstrap/'
 import "./ItemCount.css"
 
 const ItemCount = (props)=> {
-const { stock, initial } = props;
+const { stock, initial, cartItems, setCartItems  } = props;
 const [cantidad, setCantidad] = useState (initial)
 
 function sumar() {
@@ -15,7 +15,8 @@ function sumar() {
     }
     function onAdd(){
         if ( cantidad > 0 && cantidad <= stock){
-        alert("se agrego "+cantidad+" productos")
+        alert("se agrego "+cantidad+" productos");
+        setCartItems(cartItems + cantidad);
     }
     else{
         alert("NO SE AGREGARON ITEMS AL CARRITO");

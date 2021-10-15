@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState }  from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ItemCount from "../ItemCount/ItemCount";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 
  const ItemDetail = (props) => {
-    const { id, title, description, price, pictureUrl, selectItem } = props;
+    const { id, title, description, price,stock, pictureUrl, selectItem } = props;
 
     const history = useHistory();
+
+    const [cartItems, setCartItems] = useState(null);
   
     const closeDetail = () => history.goBack();
 
@@ -16,7 +18,7 @@ import { Link } from "react-router-dom";
         <div className="row">
         <div
           id={id}
-          className="card border-dark text-center m-auto "
+          className="card border-dark text-center m-auto mt-3 mb-3"
           style={{ width: "22rem" }}
         >
           <img
@@ -36,7 +38,20 @@ import { Link } from "react-router-dom";
               <strong>${price}</strong>
             </li>
             <li className="list-group-item">
-              <ItemCount stock="10" initial="1" />
+            {cartItems ? (
+              <Link exact to="/cart">
+              <button className="btn btn-success">
+                Terminar mi compra
+              </button>
+            </Link>
+            ) : (
+              <ItemCount 
+              stock={stock}
+               initial="1" 
+               cartItems={cartItems}
+               setCartItems={setCartItems}
+               />
+              )}
             </li>
           </ul>
   

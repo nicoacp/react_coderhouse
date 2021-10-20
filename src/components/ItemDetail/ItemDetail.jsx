@@ -3,18 +3,27 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import ItemCount from "../ItemCount/ItemCount";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
+import { useCartContext } from "../CartContext/CartContext"
 
- const ItemDetail = (props) => {
-    const { id, title, description, price,stock, pictureUrl, selectItem } = props;
+ export const ItemDetail = (item) => {
+    const { id, title, description, price,stock, pictureUrl } = item.item;
+    const { cartList, agregarItem } = useCartContext();
 
+  console.log(cartList);
     const history = useHistory();
 
-    const [cartItems, setCartItems] = useState(null);
+
+    const onAdd = (cant) => {
+      console.log(cant);
+      agregarItem(item.item, cant);
+    };
   
     const closeDetail = () => history.goBack();
 
   //retorna una card con todos los datos del item seleccionado
     return (
+      <>
+      {(id, title, description, price, stock, pictureUrl) ? (
         <div className="row">
         <div
           id={id}
@@ -38,18 +47,25 @@ import { Link } from "react-router-dom";
               <strong>${price}</strong>
             </li>
             <li className="list-group-item">
-            {cartItems ? (
-              <Link exact to="/cart">
-              <button className="btn btn-success">
+            {cartList.length > 0 ? (
+              <>
+              <ItemCount 
+              onAdd={onAdd}
+              stock={stock}
+               initial="1" 
+               />
+              
+              <Link  to="/cart">
+              <button className="btn btn-success my-3">
                 Terminar mi compra
               </button>
             </Link>
+            </>
             ) : (
               <ItemCount 
+              onAdd={onAdd}
               stock={stock}
                initial="1" 
-               cartItems={cartItems}
-               setCartItems={setCartItems}
                />
               )}
             </li>
@@ -62,6 +78,10 @@ import { Link } from "react-router-dom";
           </div>
         </div>
       </div>
-    )
+    ) : (
+      <h1></h1>
+      )}
+      </>
+  );
 }
 export default ItemDetail;

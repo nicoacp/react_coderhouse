@@ -48,8 +48,8 @@ const ItemListContainer = ({text, setLoading, setError }) => {
 useEffect( async () => {
     setLoading(true)
     await obtenerProductos
-      .then(response => {
-        setItems(response)
+      .then(data => {
+        setItems(data)
       })
       .catch(err => {
         setError(err)

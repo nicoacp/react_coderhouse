@@ -6,12 +6,14 @@ import ItemListContainer from './components/ItemListContainer/ItemListContainer'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
 import Cart from "./components/Cart/Cart"
+import { CartContextProvider } from "./components/CartContext/CartContext";
 
 function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   return (
     <>
+    <CartContextProvider>
     <Router>
      <NavBar />
        {/* Se muestra el mensaje de "cargando..." hasta que se recupere la informacion de la promesa y se vuelva a poner en false */}
@@ -44,7 +46,7 @@ function App() {
           </Route>
           
           {/* Ruta que lleva del boton 'terminar compra' al componente carrito */}
-          <Route exact path="/cart">
+          <Route  path="/cart">
             <Cart />
           </Route>
      </Switch>
@@ -52,6 +54,7 @@ function App() {
       {error && <div>{error}</div>}
        
     </Router>
+    </CartContextProvider>
     </>
   );
 }

@@ -38,6 +38,7 @@ export default[
     {
        id:5,
        title:"pantalon",
+       description:"pantalon",
        price:3500,
        pictureUrl:"https://solodeportes-9bvc3m9qgmf6g9x.stackpathdns.com/media/catalog/product/cache/7c4f9b393f0b8cb75f2b74fe5e9e52aa/p/a/pantalon-adidas-egle-estampado-unisex-negro-100020gq2191001-1.jpg",
        categoria:"pantalones" ,

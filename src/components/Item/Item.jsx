@@ -1,13 +1,12 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css"
-import ItemCount from "../ItemCount/ItemCount";
 import { Link } from "react-router-dom";
 
 //En este componente se retorna una card con un item y sus propiedades que provienen desde el componente ItemList, que a su vez provienen desde ItemListContainer, donde se obtuvieron desde un array
 //este Item recibe como prop un item con propiedades, el cual desestructura para luego ir integrandolas de a una en el componente donde deben estar.
 
 const Item = (props) => {
-    const {id, title, description, price, pictureUrl , selectItem} = props;
+    const {id, title, description, price, pictureUrl} = props;
 
     return (
 
@@ -26,7 +25,7 @@ const Item = (props) => {
                        </li>*/}
                 </ul>
                 <div className="card-body">
-                 <Link exact to={`/item/${id}`} className="btn btn-secondary">
+                 <Link to={`/item/${id}`} className="btn btn-secondary">
                       detalle
                 </Link>
               </div>

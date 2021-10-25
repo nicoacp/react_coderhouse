@@ -15,7 +15,7 @@ return(
         <Link className="nav-link" to="/categoria/camisetas"> camisetas</Link>
         <Link className="nav-link" to="/categoria/zapatillas">zapatillas</Link>
         <Link className="nav-link" to="/categoria/pantalones">pantalones</Link>
-          <Nav.Link href="#carrito"><CartWidget cantidad={0}/></Nav.Link>
+          <Nav.Link href="#carrito"><CartWidget/></Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Container>

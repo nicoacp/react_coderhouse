@@ -1,18 +1,18 @@
 import React ,{useState , useEffect} from 'react'
 import ItemList from "../ItemList/ItemList";
-import ItemDetailContainer from "../ItemDetailContainer/ItemDetailContainer"
+//import ItemDetailContainer from "../ItemDetailContainer/ItemDetailContainer"
 import { useParams } from "react-router-dom";
-import productos from '../data/productos';
+//import productos from '../data/productos';
+import { getFirestore } from '../../services/getFirebase';
 
-const ItemListContainer = ({text, setLoading, setError }) => {
+const ItemListContainer = ({text,loading, setLoading, setError }) => {
   
 //se inician estados
   const [items, setItems] = useState([])
-  const [selectedItem, setSelectedItem] = useState(null);
 
   const { id: idCategoria } = useParams();
-
-  const getItems = new Promise ((resolve, reject) => {
+// //asi se obtendrian los datos del .json, filtrados por categoria, con una promesa
+/*   const getItems = new Promise ((resolve, reject) => {
     setTimeout(() => {
       if (idCategoria) {
         const filtroCategoria = productos.filter(
@@ -55,26 +55,39 @@ useEffect( async () => {
         setError(err)
       })
     setLoading(false)
-  }, [])
-  //se crea un metodo que recibe como parametro un item y setea el estado de selected item con el contenido de dicho item >> para saber que item es el seleccionado
-  const selectItem = (item) => setSelectedItem(item);
+  }, []) */
+  
+//llamado a firestore asincrono y onMount/cambio de categoria
+useEffect(() => {
+  const getItems = async () => {
+    setLoading(true);
+    const { docs } = await getFirestore().collection("productos").get();
+    const arrayCompleto = docs.map((item) => ({
+      id: item.id,
+      ...item.data(),
+    }));
 
-  return (
-    <div className="container text-center">
-      <h1 className="text-center py-2">{text}</h1>
-      {/* En este renderizado condicional se mostrara >> En caso de que se selecione un item y selectedItem tenga contenido, se renderizara el ItemDetailContainer al cual se le va  apasar la informacion de dicho item para que lo renderize y en caso de que no se seleccione nada (selectedItem == null) se renderizara la lista de items */}
-      {!selectedItem ? (
-        <ItemList items={items} selectItem={selectItem} />
-      ) : (
-        <ItemDetailContainer
-          selectedItem={selectedItem}
-          selectItem={selectItem}
-          setError={setError}
-          setLoading={setLoading}
-        />
-      )}
-    </div>
-  );
+    if (idCategoria) {
+      const filtrarCategoria = arrayCompleto.filter(
+        (item) => item.categoria === idCategoria
+      );
+      setItems(filtrarCategoria);
+      setLoading(false);
+    } else {
+      setItems(arrayCompleto);
+      setLoading(false);
+    }
+  };
+  getItems();
+}, [idCategoria]);
+
+return (
+  <div className="container text-center">
+    <h1 className="text-center py-2">{text}</h1>
+
+    {loading ? loading : <ItemList items={items} />}
+  </div>
+);
 };
 
 export default ItemListContainer

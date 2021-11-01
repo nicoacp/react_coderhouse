@@ -16,7 +16,7 @@ const Item = (props) => {
                 <img src={pictureUrl} className="card-img-top p-1" style={{ height: "18rem" }} alt="..." />
                 <div className="card-body">
                     <h5 className="card-title">{title}</h5>
-                    <p className="card-text">{description}</p>
+                    {/* <p className="card-text">{description}</p> */}
                 </div>
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item"><strong>${price}</strong></li>

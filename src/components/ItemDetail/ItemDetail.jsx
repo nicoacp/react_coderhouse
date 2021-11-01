@@ -38,8 +38,8 @@ import { useCartContext } from "../CartContext/CartContext"
           />
   
           <div className="card-body">
-            <h5 className="card-title">{title}</h5>
-            <p className="card-text">{description}</p>
+            <h3 className="card-title">{title}</h3>
+            <h5 className="card-text">{description}</h5>
           </div>
   
           <ul className="list-group list-group-flush">

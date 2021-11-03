@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
 import Cart from "./components/Cart/Cart"
 import { CartContextProvider } from "./components/CartContext/CartContext";
+import Checkout from "./components/checkout/Checkout";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -49,6 +50,9 @@ function App() {
           <Route  path="/cart">
             <Cart />
           </Route>
+          <Route path="/checkout">
+              <Checkout />
+            </Route>
      </Switch>
       {/* si error deja de ser null y pasa a contener algo se renderizara el mensaje de error que se encontrara dentro del estado error al haber sido seteado en el catch de la promesa por el fallo de la misma */}
       {error && <div>{error}</div>}

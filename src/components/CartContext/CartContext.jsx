@@ -7,14 +7,11 @@ export const useCartContext = () => useContext(CartContext);
 export const CartContextProvider = ({ children }) => {
   //Estado que se encarga de almacenar al carrito
   const [cartList, setCartList] = useState([]);
-
-  console.log(cartList);
-
   //agregarItem agrega item al carrito
   const agregarItem = (item, quantity) => {
     if (isInCart(item.id)) {
       const updateQty = [...cartList]; //crea una copia de carrito para hacer un mapeo y sumarle la cantidad al producto en caso de ya estar agregado
-
+// eslint-disable-next-line
       updateQty.map((element) => {
         if (element.item.id === item.id) {
           element.quantity += quantity;
@@ -28,9 +25,10 @@ export const CartContextProvider = ({ children }) => {
       window.sessionStorage.setItem("cart", JSON.stringify(carro));
     }
   };
-
   //isInCart chequea si el producto esta o no en el carrito
-  const isInCart = (id) => cartList.find((element) => element.item.id === id);
+  function isInCart(id) {
+    return cartList.find((element) => element.item.id === id);
+  }
 
   //funcion que borra todos los items del carro
   const clearCart = () => setCartList([]);
@@ -53,8 +51,6 @@ export const CartContextProvider = ({ children }) => {
       0
     );
     parseInt(totalPrice);
-  
-  //console.log("carrito", cartList);
 
   return (
     <CartContext.Provider

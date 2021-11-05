@@ -16,15 +16,6 @@ const [cantidad, setCantidad] = useState(parseInt (initial));
       setCantidad(cantidad - 1)
     }
   };
-  //  function onAdd(){
-    //    if ( cantidad > 0 && cantidad <= stock){
-      //  alert("se agrego "+cantidad+" productos");
-      //  setCartItems(cartItems + cantidad);
-   // }
-   // else{
-   //     alert("NO SE AGREGARON ITEMS AL CARRITO");
-   // }
-   // }
     return (
         <>
          <div className="input-group mb-3">

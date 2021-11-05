@@ -1,29 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ItemDetail from "../ItemDetail/ItemDetail";
-//import productos from "../data/productos";
 import { useParams } from "react-router-dom";
 import { getFirestore } from "../../services/getFirebase";
 
-const ItemDetailContainer = ({ setLoading,setError, }) => {
+const ItemDetailContainer = ({ setLoading, }) => {
     const [item, setItem] = useState([]);
     const { id: itemId } = useParams();
-
-/*   // //asi se llamaria a los items del .json con promesas
-  const getItems = new Promise((resolve, reject) => {
-    setTimeout(() => {
-    const idProducto = productos.find((item) => item.id === parseInt(itemId));
-      resolve(idProducto);
-      reject("Hubo un error al seleccionar el item");
-    }, 2000);
-  });
- useEffect(async () => {
-    setLoading(true);
-    await getItems
-      .then((response) => setItem(response))
-     .catch((err) => setError(err));
-     setLoading(false);
-    }, [itemId]); */
-  //se retorna el componente <ItemDetail/> habiendole pasado como props el item seleccionado
 
   //llamada a firestone
   useEffect(() => {
@@ -36,6 +18,7 @@ const ItemDetailContainer = ({ setLoading,setError, }) => {
       setLoading(false);
     };
     getItem();
+    // eslint-disable-next-line
   }, [itemId]);
   //se retorna el componente <ItemDetail/> habiendole pasado como props el item seleccionado
   return <ItemDetail item={item}/>

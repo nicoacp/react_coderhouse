@@ -47,7 +47,6 @@ const Cart = () => {
             </p>
             <button
               className="btn bg-warning my-3 col-4 mx-auto"
-              //cuando se clickea se ejecuta una funcion que llama a "removeItem" con parametro el id del item a remover
               onClick={clearCart}
             >
               Vaciar Carrito
@@ -57,7 +56,6 @@ const Cart = () => {
             <Link to="/Checkout">
               <button
                 className="btn bg-success my-3 col-6 mx-auto py-3"
-                // onClick={clearCart}
               >
                 Finalizar Compra
               </button>

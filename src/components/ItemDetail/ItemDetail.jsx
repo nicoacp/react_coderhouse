@@ -1,4 +1,4 @@
-import React, { useState }  from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ItemCount from "../ItemCount/ItemCount";
 import { useHistory } from "react-router";
@@ -57,7 +57,7 @@ import { useCartContext } from "../CartContext/CartContext"
               
               <Link  to="/cart">
               <button className="btn btn-success my-3">
-                Terminar mi compra
+                ir al detalle del carrito
               </button>
             </Link>
             </>
@@ -79,6 +79,7 @@ import { useCartContext } from "../CartContext/CartContext"
         </div>
       </div>
     ) : (
+      // eslint-disable-next-line
       <h1></h1>
       )}
       </>

@@ -7,8 +7,6 @@ import { Accordion} from "react-bootstrap";
 const Cart = () => {
   const { cartList, clearCart, removeItem, totalPrice } = useCartContext();
 
-  console.log(cartList);
-
   return (
     <div className="container text-center">
       <h1 className="display-1">Carrito de compras</h1>
